@@ -27,21 +27,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
     // The below code fills in the first row of the table
-    var movie = "Mr. Nobody";
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+    var movie = ["Mr. Nobody","Matrix","B"];
+    for(var i=0; i<movie.length; i++){
+      var queryURL = "https://www.omdbapi.com/?t=" + movie[i] + "&y=&plot=short&apikey=trilogy";
+    
 
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-
+      
       // Obtain a reference to the tbody element in the DOM
+      var tableRow=$("<tr>");
       // Create and save a reference to new empty table row
+      var titleD=$("<td>");
+      var yearD=$("<td>");
+      var actorsD=$("<td>");
+      $(titleD).text(response.Title);
+      console.log(response.Title)
+      $(yearD).text(response.Year);
+      console.log(response.Year)
+      $(actorsD).text(response.Actors)
+      console.log(response.actorsD)
       // Create and save references to 3 td elements containing the Title, Year, and Actors from the AJAX response object
+      $(tableRow).append(titleD);
+      $(tableRow).append(yearD);
+      $(tableRow).append(actorsD);
       // Append the td elements to the new table row
+      $("tbody").append(tableRow);
       // Append the table row to the tbody element
     });
-
+    }
     // Repeat the above logic to add rows for two more movies of your choice
 
     // BONUS: Once complete, try to make your code as DRY as possible through the use of functions
